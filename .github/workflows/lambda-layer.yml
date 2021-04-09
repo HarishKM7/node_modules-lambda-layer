@@ -1,4 +1,6 @@
 name: Build & deploy the Lambda layer.
+env:
+  NPM_PACKAGES: lodash
 on:
   push:
     branches: [ main ]
@@ -8,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-node@v2.1.5
-    - run: npm install lodash
+    - run: npm install $NPM_PACKAGES
