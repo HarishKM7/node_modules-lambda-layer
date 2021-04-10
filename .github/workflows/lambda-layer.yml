@@ -11,3 +11,5 @@ jobs:
     steps:
     - uses: actions/setup-node@v2.1.5
     - run: npm install $NPM_PACKAGES
+    - uses: ItsKarma/aws-cli@v1.70.0
+    - run: aws --version
