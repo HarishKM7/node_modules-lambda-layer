@@ -1,4 +1,3 @@
-name: Build & deploy the Lambda layer.
 env:
   NPM_PACKAGES: lodash
 on:
@@ -11,5 +10,14 @@ jobs:
     steps:
     - uses: actions/setup-node@v2.1.5
     - run: npm install $NPM_PACKAGES
+    - uses: TheDoctor0/zip-release@0.4.1
     - uses: ItsKarma/aws-cli@v1.70.0
-    - run: aws --version
+      with:
+        args: >
+          lambda publish-layer-version
+          --layer-name node_modules
+          --zip-file fileb://release.zip
+      env:
+        AWS_DEFAULT_REGION: ap-south-1
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
