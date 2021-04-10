@@ -1,2 +1,1 @@
-# node_modules-lambda-layer
-Deploy a Lambda layer to your AWS account with NPM packages you specify.
+This repo hosts a GitHub action that builds & deploys a Lambda layer with the NPM packages you specify.
