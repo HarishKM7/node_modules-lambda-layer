@@ -1,5 +1,5 @@
 env:
-  NPM_PACKAGES: lodash
+  NPM_PACKAGES: express mysql
 on:
   push:
     branches: [ main ]
@@ -9,13 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-node@v2.1.5
+    - run: mkdir nodejs && cd nodejs
     - run: npm install $NPM_PACKAGES
+    - run: cd ..
     - uses: TheDoctor0/zip-release@0.4.1
     - uses: ItsKarma/aws-cli@v1.70.0
       with:
         args: >
           lambda publish-layer-version
           --layer-name node_modules
+          --compatible-runtimes nodejs
           --zip-file fileb://release.zip
       env:
         AWS_DEFAULT_REGION: ap-south-1
